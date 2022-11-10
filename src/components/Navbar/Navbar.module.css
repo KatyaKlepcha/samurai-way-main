@@ -1,0 +1,18 @@
+.nav {
+    grid-area: nav;
+    background-color: teal;
+    padding: 30px;
+}
+
+.item {
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.item:hover{
+    transform: scale(1.2, 1.2) ;
+}
+
+.item.active{
+    color: blueviolet;
+}
