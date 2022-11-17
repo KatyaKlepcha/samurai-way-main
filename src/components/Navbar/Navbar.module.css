@@ -9,10 +9,15 @@
     cursor: pointer;
 }
 
-.item:hover{
-    transform: scale(1.2, 1.2) ;
+.item:hover {
+    transform: scale(1.2, 1.2);
 }
 
-.item.active{
-    color: blueviolet;
+.item a {
+    text-decoration: none;
+    color: aliceblue;
+}
+
+.item a.active {
+    color: #000;
 }

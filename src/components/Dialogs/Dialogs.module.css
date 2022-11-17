@@ -1,0 +1,20 @@
+.dialogs {
+    display: flex;
+}
+
+.dialogs_item {
+    width: 200px;
+    padding: 10px;
+}
+
+.dialogs_item a{
+color: mediumvioletred;
+}
+
+.dialogs_item .active{
+    color: burlywood;
+}
+
+.messages {
+    padding: 10px;
+}
