@@ -7,11 +7,11 @@
     padding: 10px;
 }
 
-.dialogs_item a{
-color: mediumvioletred;
+.dialogs_item a {
+    color: mediumvioletred;
 }
 
-.dialogs_item .active{
+.dialogs_item a.active {
     color: burlywood;
 }
 
