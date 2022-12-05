@@ -2,25 +2,31 @@ import React from "react";
 import s from './MyPosts.module.css'
 import Post from "./Post/Post";
 
-import {PostType, ProfilePageType} from "../../redux/state";
+import {PostType} from "../../redux/state";
 
 type MyPostsType = {
     posts: Array<PostType>
+    addPost: (postMessage: string) => void
 }
 
 const MyPosts = (props: MyPostsType) => {
+    const newPostRef = React.createRef<HTMLTextAreaElement>()
 
-    // const postDate = [
-    //     {id: 1, message: 'hello, let\'s meet today?',likesCount: 15 },
-    //     {id: 2, message: 'did you see my message?', likesCount: 20},
-    // ]
+    const addNewPost = () => {
+        let text = newPostRef.current?.value
+        if (text) {
+            props.addPost(text)
+            newPostRef.current?.value && (newPostRef.current.value = '')
+        }
+    }
 
     return (
         <div className={s.posts}>My Posts
             <div>
-                <textarea/>
+                <textarea ref={newPostRef}/>
                 <div>
-                    <button className={s.button}>Send</button>
+                    <button onClick={addNewPost} className={s.button}>Send
+                    </button>
                 </div>
 
             </div>
