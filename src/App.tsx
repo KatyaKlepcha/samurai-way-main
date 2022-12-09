@@ -5,7 +5,7 @@ import Dialogs from './components/Dialogs/Dialogs';
 import Header from './components/Header/Header';
 import Navbar from "./components/Navbar/Navbar";
 import Profile from "./components/Profile/Profile";
-import {addPost, RootStateType} from './components/redux/state'
+import {addPost, RootStateType, updateNewPostText} from './components/redux/state'
 
 type AppPropsType = {
     state: RootStateType
@@ -19,7 +19,8 @@ const App = (props: AppPropsType) => {
             <Header/>
             <Navbar/>
             <div className={'App-content'}>
-                <Route path='/profile' render={() => <Profile state={props.state.profilePage} addPost={addPost}/>}/>
+                <Route path='/profile' render={() => <Profile profilePage={props.state.profilePage} addPost={addPost}
+                                                              updateNewPostText={updateNewPostText}/>}/>
                 <Route path='/messages'
                        render={() => <Dialogs state={props.state.dialogsPage}/>}/>
                 {/*<Route path='/news' component={News}/>*/}

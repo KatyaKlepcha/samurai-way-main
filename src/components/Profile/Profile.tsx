@@ -5,15 +5,17 @@ import s from './Profile.module.css'
 import {ProfilePageType} from "../redux/state";
 
 type ProfileType = {
-    state: ProfilePageType
-    addPost: (postMessage: string) => void
+    profilePage: ProfilePageType
+    addPost: () => void
+    updateNewPostText: (newPostText: string) => void
 }
 
 const Profile = (props: ProfileType) => {
     return (
         <div className={s.profile_wrapper}>
             <ProfileInfo/>
-            <MyPosts posts={props.state.posts} addPost={props.addPost}/>
+            <MyPosts posts={props.profilePage.posts} addPost={props.addPost}
+                     newPostText={props.profilePage.newPostText} updateNewPostText={props.updateNewPostText}/>
         </div>
     )
 }
