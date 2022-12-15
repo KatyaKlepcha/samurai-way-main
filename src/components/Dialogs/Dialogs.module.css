@@ -18,3 +18,8 @@
 .messages {
     padding: 10px;
 }
+
+.sendMessage {
+    display: flex;
+    align-items: center;
+}

@@ -1,23 +1,36 @@
-import React from "react";
+import React, {ChangeEvent} from "react";
 import s from "./Dialogs.module.css";
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import {DialogsPageType, RootStateType} from "../redux/state";
+import {
+    ActionsTypes,
+    DialogsPageType,
+    sendNewMessageActionCreator,
+    updateNewMessageActionCreator
+} from "../redux/state";
 
 type DialogsPropsType = {
-
     state: DialogsPageType
+    dispatch: (action: ActionsTypes) => void
     // dialogs: Array<DialogsType>
     // messages: Array<MessagesType>
 }
 
 const Dialogs = (props: DialogsPropsType) => {
 
-    const newMessageRef = React.createRef<HTMLTextAreaElement>()
+    let newMessageBody = props.state.newMessageBody
 
-    const addMessage = ()=>{
-        let message = newMessageRef.current?.value
-        alert(message)
+    //const newMessageRef = React.createRef<HTMLTextAreaElement>()
+
+    const onSendMessage = () => {
+        props.dispatch(sendNewMessageActionCreator())
+    }
+
+    const onChangeMessage = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        //let message = newMessageRef.current?.value
+        let message = e.currentTarget.value
+        console.log('message', message)
+        props.dispatch(updateNewMessageActionCreator(message))
     }
 
     return (
@@ -30,13 +43,15 @@ const Dialogs = (props: DialogsPropsType) => {
                 {/*<div className={s.dialog}><NavLink to={'/dialog/2'}>Natalya</NavLink></div>*/}
                 {/*<div className={s.dialog}><NavLink to={'/dialog/3'}>Denis</NavLink></div>*/}
                 {/*<div className={s.dialog}><NavLink to={'/dialog/4'}>Yura</NavLink></div>*/}
-                {props.state.dialogs.map(d=><DialogItem name={d.name} id={d.id}/>)}
+                {props.state.dialogs.map(d => <DialogItem name={d.name} id={d.id}/>)}
             </div>
             <div className={s.messages}>
-                {props.state.messages.map(m=><Message text={m.text}/>)}
+                {props.state.messages.map(m => <Message text={m.text}/>)}
             </div>
-            <textarea ref={newMessageRef}/>
-            <button onClick={addMessage}>Send message</button>
+            <div className={s.sendMessage}>
+                <textarea value={newMessageBody} onChange={onChangeMessage}/>
+                <button onClick={onSendMessage}>Send message</button>
+            </div>
         </div>
     )
 }
