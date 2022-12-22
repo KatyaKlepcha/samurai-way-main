@@ -5,7 +5,8 @@ import Dialogs from './components/Dialogs/Dialogs';
 import Header from './components/Header/Header';
 import Navbar from "./components/Navbar/Navbar";
 import Profile from "./components/Profile/Profile";
-import store, {RootStateType} from './components/redux/state'
+import {RootStateType} from './components/redux/store'
+import store from "./components/redux/redux-store";
 
 type AppPropsType = {
     state: RootStateType

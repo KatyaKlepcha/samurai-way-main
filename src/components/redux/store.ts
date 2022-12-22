@@ -90,7 +90,7 @@ export type SidebarType = {
     friends: Array<FriendsType>
 }
 
-type FriendsType = {
+export type FriendsType = {
     id: number
     name: string
 }
