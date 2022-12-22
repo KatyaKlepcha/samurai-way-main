@@ -55,7 +55,7 @@ let store: StoreType = {
     }
 }
 
-type StoreType = {
+export type StoreType = {
     _state: RootStateType
     _callSubscriber: () => void
     getState: () => RootStateType

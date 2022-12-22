@@ -4,32 +4,38 @@ import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import {
     ActionsTypes,
-    DialogsPageType,
+    DialogsPageType, StoreType,
 } from "../redux/store";
-import { sendNewMessageActionCreator, updateNewMessageActionCreator } from "../redux/dialogsReducer";
+import {sendNewMessageActionCreator, updateNewMessageActionCreator} from "../redux/dialogsReducer";
 
 type DialogsPropsType = {
-    state: DialogsPageType
-    dispatch: (action: ActionsTypes) => void
+    // state: DialogsPageType
+    // dispatch: (action: ActionsTypes) => void
+    dialogsPage: DialogsPageType
+    onChangeMessage: (message: string) => void
+    onSendMessage: () => void
+    newMessageBody: string
     // dialogs: Array<DialogsType>
     // messages: Array<MessagesType>
 }
 
 const Dialogs = (props: DialogsPropsType) => {
 
-    let newMessageBody = props.state.newMessageBody
+    let state = props.dialogsPage
+
+    let newMessageBody = state.newMessageBody
 
     //const newMessageRef = React.createRef<HTMLTextAreaElement>()
 
     const onSendMessage = () => {
-        props.dispatch(sendNewMessageActionCreator())
+        props.onSendMessage()
     }
 
     const onChangeMessage = (e: ChangeEvent<HTMLTextAreaElement>) => {
         //let message = newMessageRef.current?.value
         let message = e.currentTarget.value
-        console.log('message', message)
-        props.dispatch(updateNewMessageActionCreator(message))
+
+        props.onChangeMessage(message)
     }
 
     return (
@@ -42,10 +48,10 @@ const Dialogs = (props: DialogsPropsType) => {
                 {/*<div className={s.dialog}><NavLink to={'/dialog/2'}>Natalya</NavLink></div>*/}
                 {/*<div className={s.dialog}><NavLink to={'/dialog/3'}>Denis</NavLink></div>*/}
                 {/*<div className={s.dialog}><NavLink to={'/dialog/4'}>Yura</NavLink></div>*/}
-                {props.state.dialogs.map(d => <DialogItem name={d.name} id={d.id}/>)}
+                {state.dialogs.map(d => <DialogItem name={d.name} id={d.id}/>)}
             </div>
             <div className={s.messages}>
-                {props.state.messages.map(m => <Message text={m.text}/>)}
+                {state.messages.map(m => <Message text={m.text}/>)}
             </div>
             <div className={s.sendMessage}>
                 <textarea value={newMessageBody} onChange={onChangeMessage}/>
