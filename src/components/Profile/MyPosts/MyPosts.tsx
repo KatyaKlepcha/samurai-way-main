@@ -1,16 +1,16 @@
 import React, {ChangeEvent} from "react";
 import s from './MyPosts.module.css'
 import Post from "./Post/Post";
-
-import {PostType} from "../../redux/store";
-
-type MyPostsType = {
-    posts: Array<PostType>
-    newPostText: string
-    // dispatch: (action: ActionsTypes) => void
-    updateNewPostText: (newPostText: string) => void
-    addPost: () => void
-}
+import { MyPostsType } from "./MyPostsContainer";
+import { PostType } from "../../redux/profileReducer";
+//
+// type MyPostsType = {
+//     posts: Array<PostType>
+//     newPostText: string
+//     // dispatch: (action: ActionsTypes) => void
+//     updateNewPostText: (newPostText: string) => void
+//     addPost: () => void
+// }
 
 const MyPosts = (props: MyPostsType) => {
     // const newPostRef = React.createRef<HTMLTextAreaElement>()
@@ -38,7 +38,7 @@ const MyPosts = (props: MyPostsType) => {
                 </div>
 
             </div>
-            {props.posts.map((p: PostType) => <Post message={p.message} likesCount={p.likesCount}/>)}
+            {props.posts.map((p: PostType) => <Post key={p.id} message={p.message} likesCount={p.likesCount}/>)}
         </div>
     )
 }

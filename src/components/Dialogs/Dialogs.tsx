@@ -2,24 +2,20 @@ import React, {ChangeEvent} from "react";
 import s from "./Dialogs.module.css";
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import {
-    ActionsTypes,
-    DialogsPageType, StoreType,
-} from "../redux/store";
-import {sendNewMessageActionCreator, updateNewMessageActionCreator} from "../redux/dialogsReducer";
+import {DialogsType} from "./DialogsContainer";
+//
+// type DialogsPropsType = {
+//     // state: DialogsPageType
+//     // dispatch: (action: ActionsTypes) => void
+//     dialogsPage: DialogsPageType
+//     onChangeMessage: (message: string) => void
+//     onSendMessage: () => void
+//     newMessageBody: string
+//     // dialogs: Array<DialogsType>
+//     // messages: Array<MessagesType>
+// }
 
-type DialogsPropsType = {
-    // state: DialogsPageType
-    // dispatch: (action: ActionsTypes) => void
-    dialogsPage: DialogsPageType
-    onChangeMessage: (message: string) => void
-    onSendMessage: () => void
-    newMessageBody: string
-    // dialogs: Array<DialogsType>
-    // messages: Array<MessagesType>
-}
-
-const Dialogs = (props: DialogsPropsType) => {
+const Dialogs = (props: DialogsType) => {
 
     let state = props.dialogsPage
 
@@ -48,10 +44,10 @@ const Dialogs = (props: DialogsPropsType) => {
                 {/*<div className={s.dialog}><NavLink to={'/dialog/2'}>Natalya</NavLink></div>*/}
                 {/*<div className={s.dialog}><NavLink to={'/dialog/3'}>Denis</NavLink></div>*/}
                 {/*<div className={s.dialog}><NavLink to={'/dialog/4'}>Yura</NavLink></div>*/}
-                {state.dialogs.map(d => <DialogItem name={d.name} id={d.id}/>)}
+                {state.dialogs.map(d => <DialogItem key={d.id} name={d.name} id={d.id}/>)}
             </div>
             <div className={s.messages}>
-                {state.messages.map(m => <Message text={m.text}/>)}
+                {state.messages.map(m => <Message key = {m.id} text={m.text}/>)}
             </div>
             <div className={s.sendMessage}>
                 <textarea value={newMessageBody} onChange={onChangeMessage}/>

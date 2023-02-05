@@ -75,13 +75,12 @@ export type RootStateType = {
     profilePage: ProfilePageType
     sidebar: SidebarType
 }
-
-export type DialogsPageType = {
+type DialogsPageType = {
     dialogs: Array<DialogsType>
     messages: Array<MessagesType>
     newMessageBody: string
 }
-export type ProfilePageType = {
+type ProfilePageType = {
     posts: Array<PostType>
     newPostText: string
 }
@@ -96,17 +95,17 @@ export type FriendsType = {
 }
 
 
-export type DialogsType = {
+type DialogsType = {
     id: number
     name: string
 }
 
-export type MessagesType = {
+type MessagesType = {
     id: number
     text: string
 }
 
-export type PostType = {
+type PostType = {
     id: number
     message: string
     likesCount: number

@@ -1,4 +1,4 @@
-import {ActionsTypes, DialogsPageType, MessagesType} from "./store";
+import {ActionsTypes} from "./store";
 
 const SEND_MESSAGE = 'SEND-MESSAGE'
 const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY'
@@ -19,22 +19,47 @@ let initialState = {
     newMessageBody: '',
 }
 
-type InitialStateType = typeof initialState
+export type InitialStateType = DialogsPageType
+
+export type DialogsPageType = {
+    dialogs: Array<DialogsType>
+    messages: Array<MessagesType>
+    newMessageBody: string
+}
+
+type DialogsType = {
+    id: number
+    name: string
+}
+
+export type MessagesType = {
+    id: number
+    text: string
+}
+
 
 const dialogsReducer = (state: InitialStateType = initialState, action: ActionsTypes): InitialStateType => {
     switch (action.type) {
         case SEND_MESSAGE:
-            const newMessage: MessagesType = {
-                id: 5,
-                text: state.newMessageBody
+            let body = state.newMessageBody
+            // const newMessage: MessagesType = {
+            //     id: 5,
+            //     text: body
+            // }
+
+            return {
+                ...state,
+                messages: [...state.messages, {id: 5, text: body}],
+                newMessageBody: ''
             }
-            state.messages.push(newMessage)
-            state.newMessageBody = ''
-            return state;
+            // stateCopy.messages.push(newMessage)
+            // stateCopy.newMessageBody = ''
+
         case UPDATE_NEW_MESSAGE_BODY:
-            state.newMessageBody = action.newMessageBody
-            return state;
-        default: return state
+            return {...state, newMessageBody: action.newMessageBody}
+
+        default:
+            return state
     }
 }
 
