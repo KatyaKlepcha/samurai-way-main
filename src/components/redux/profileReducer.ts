@@ -1,7 +1,9 @@
-import {ActionsTypes} from "./store";
+import {ProfileType} from "../Profile/ProfileContainer";
+
 
 const ADD_POST = 'ADD-POST'
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
+const SET_USER_PROFILE = 'SET-USER-PROFILE'
 
 let initialState = {
     posts: [
@@ -9,13 +11,15 @@ let initialState = {
         {id: 2, message: 'did you see my message?', likesCount: 20},
     ],
     newPostText: '',
+    profile: null
 }
 
 export type InitialStateType = ProfilePageType
 
-type ProfilePageType = {
+export type ProfilePageType = {
     posts: Array<PostType>
     newPostText: string
+    profile: ProfileType | null
 }
 
 export type PostType = {
@@ -24,7 +28,11 @@ export type PostType = {
     likesCount: number
 }
 
-const profileReducer = (state: InitialStateType = initialState, action: ActionsTypes): InitialStateType => {
+export type ProfileActionsTypes = ReturnType<typeof addNewPostActionCreator>
+    | ReturnType<typeof updateNewPostTextActionCreator>
+    | ReturnType<typeof setUserProfile>
+
+const profileReducer = (state: InitialStateType = initialState, action: ProfileActionsTypes): InitialStateType => {
     switch (action.type) {
         case ADD_POST:
             const newPost: PostType = {
@@ -38,22 +46,26 @@ const profileReducer = (state: InitialStateType = initialState, action: ActionsT
                 posts: [...state.posts, newPost],
                 newPostText: ''
             }
-            // stateCopy.posts = [...state.posts]
-            // stateCopy.posts.push(newPost)
-            // stateCopy.newPostText = ''
-            // return stateCopy;
+        // stateCopy.posts = [...state.posts]
+        // stateCopy.posts.push(newPost)
+        // stateCopy.newPostText = ''
+        // return stateCopy;
 
         case UPDATE_NEW_POST_TEXT:
             return {
                 ...state, newPostText: action.newPostText
             }
-            // stateCopy.newPostText = action.newPostText
-            // return stateCopy;
-
+        // stateCopy.newPostText = action.newPostText
+        // return stateCopy;
+        case SET_USER_PROFILE:
+            return {
+                ...state, profile: action.profile
+            }
         default:
             return state
     }
 }
+
 
 export const addNewPostActionCreator = () => ({
     type: ADD_POST
@@ -63,5 +75,12 @@ export const updateNewPostTextActionCreator = (newPostText: string) => ({
     type: UPDATE_NEW_POST_TEXT,
     newPostText
 }) as const
+
+
+export const setUserProfile = (profile: ProfileType | null) => ({
+    type: SET_USER_PROFILE,
+    profile
+}) as const
+
 
 export default profileReducer

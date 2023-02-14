@@ -1,9 +1,14 @@
 import React from 'react';
-import s from './ProfileInfo.module.css'
+import Preloader from "../../common/Preloader";
+import {ProfilePropsType} from '../Profile';
 
-const ProfileInfo = () => {
+const ProfileInfo = (props: ProfilePropsType) => {
+    if (!props.profile) {
+        return <Preloader/>
+    }
     return (
         <div>
+            <img src={props.profile.photos.large}/>
             <div>ava + description</div>
         </div>
     );

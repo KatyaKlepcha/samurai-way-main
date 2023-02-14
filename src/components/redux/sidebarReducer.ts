@@ -1,4 +1,12 @@
-import {ActionsTypes, FriendsType, SidebarType} from "./store";
+export type SidebarType = {
+    friends: Array<FriendsType>
+}
+
+export type FriendsType = {
+    id: number
+    name: string
+}
+
 
 let initialState: SidebarType = {
     friends: [
@@ -10,7 +18,7 @@ let initialState: SidebarType = {
 
 type InitialStateType = typeof initialState
 
-const sidebarReducer = (state: InitialStateType = initialState, action: ActionsTypes): InitialStateType => {
+const sidebarReducer = (state: InitialStateType = initialState, action: any): InitialStateType => {
     return state
 }
 
