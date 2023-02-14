@@ -8,8 +8,8 @@ const ProfileInfo = (props: ProfilePropsType) => {
     }
     return (
         <div>
-            <img src={props.profile.photos.large}/>
-            <div>ava + description</div>
+            <img src={props.profile.photos.large} alt={'photo'}/>
+            <div>{props.profile.aboutMe}</div>
         </div>
     );
 };
