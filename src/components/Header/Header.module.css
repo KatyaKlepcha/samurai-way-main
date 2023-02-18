@@ -1,9 +1,23 @@
 .header {
     grid-area: header;
     background-color: #000;
+    display: flex;
 }
 
 .header img {
     height: 60px;
     width: 122px;
+}
+
+.loginBlock {
+    display: flex;
+    align-items: center;
+}
+
+.loginBlock a {
+    color: white;
+}
+
+.login {
+    color: white
 }
