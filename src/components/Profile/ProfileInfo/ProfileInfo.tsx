@@ -1,6 +1,7 @@
 import React from 'react';
 import Preloader from "../../common/Preloader";
 import {ProfilePropsType} from '../Profile';
+import ProfileStatus from "./ProfileStatus";
 
 const ProfileInfo = (props: ProfilePropsType) => {
     if (!props.profile) {
@@ -9,7 +10,7 @@ const ProfileInfo = (props: ProfilePropsType) => {
     return (
         <div>
             <img src={props.profile.photos.large} alt={'photo'}/>
-            <div>{props.profile.aboutMe}</div>
+            <ProfileStatus {...props}/>
         </div>
     );
 };
