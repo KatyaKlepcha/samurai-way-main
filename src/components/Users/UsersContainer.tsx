@@ -5,6 +5,7 @@ import React from "react";
 import Users from "./Users";
 import Preloader from "../common/Preloader";
 import {withAuthRedirect} from "../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 type MapStateType = {
     users: Array<UserType>
@@ -64,36 +65,12 @@ const mapStateToProps = (state: AppStateType): MapStateType => {
     }
 }
 
-// const mapDispatchToProps = (dispatch: Dispatch): MapDispatchType => {
-//     return {
-//         onFollow: (userID: number) => {
-//             dispatch(followAC(userID))
-//         },
-//
-//         onUnFollow: (userID: number) => {
-//             dispatch(unfollowAC(userID))
-//         },
-//
-//         onSetUsers: (users: UserType[]) => {
-//             dispatch(setUsersAC(users))
-//         },
-//         onSetCurrentPage: (currentPage: number) => {
-//             dispatch(setCurrentPageAC(currentPage))
-//         },
-//         onSetTotalUsersCount: (totalCount: number) => {
-//             dispatch(setTotalUsersCountAC(totalCount))
-//         },
-//         toggleIsFetching: (isFetching: boolean) => {
-//             dispatch(toggleIsFetchingAC(isFetching))
-//         }
-//     }
-// }
-
 export type UsersType = MapStateType & MapDispatchType
 
-export default withAuthRedirect(connect(mapStateToProps, {
+export default compose<React.ComponentType>(withAuthRedirect,
+    connect(mapStateToProps, {
     follow, unFollow,
     getUsers,
     setCurrentPage,
     toggleInFollowingProgress
-})(UsersContainer))
+}))(UsersContainer)
