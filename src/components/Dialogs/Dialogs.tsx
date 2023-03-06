@@ -3,7 +3,6 @@ import s from "./Dialogs.module.css";
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import {DialogsType} from "./DialogsContainer";
-import {Redirect} from "react-router-dom";
 //
 // type DialogsPropsType = {
 //     // state: DialogsPageType
@@ -34,8 +33,6 @@ const Dialogs = (props: DialogsType) => {
 
         props.onChangeMessage(message)
     }
-
-    if (!props.isAuth) return <Redirect to={'/login'}/>
 
     return (
         <div className={s.dialogs}>
