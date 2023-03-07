@@ -6,31 +6,6 @@ import {AppStateType} from "../../redux/redux-store";
 import {Dispatch} from "redux";
 import {ProfileType} from "../ProfileContainer";
 
-// const MyPostsContainer = () => {
-//
-//     return (
-//         <StoreContext.Consumer>
-//             {store => {
-//                 let state = store.getState()
-//
-//                 const addNewPost = () => {
-//                     store.dispatch(addNewPostActionCreator())
-//                 }
-//
-//                 const onChangePost = (newPostText: string) => {
-//                     store.dispatch(updateNewPostTextActionCreator(newPostText))
-//                 }
-//
-//                 return (
-//                     <MyPosts updateNewPostText={onChangePost} addPost={addNewPost} posts={state.profilePage.posts}
-//                              newPostText={state.profilePage.newPostText}/>
-//                 )
-//             }
-//             }
-//         </StoreContext.Consumer>
-//     )
-// }
-
 type MapStatePropsType = InitialStateType
 
 type MapDispatchPropsType = {
