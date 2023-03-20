@@ -14,9 +14,11 @@
 .App-content{
     grid-area: content;
     background-color: burlywood;
-    background-image: url("https://abrakadabra.fun/uploads/posts/2021-12/1640645365_1-abrakadabra-fun-p-oboi-na-rabochii-stol-biznes-motivatsiya-1.jpg");
+    /*background-image: url("https://abrakadabra.fun/uploads/posts/2021-12/1640645365_1-abrakadabra-fun-p-oboi-na-rabochii-stol-biznes-motivatsiya-1.jpg");*/
     background-size: cover;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    padding: 20px;
+    position: relative;
 }

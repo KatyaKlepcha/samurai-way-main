@@ -1,12 +1,60 @@
 .user {
-    width: 25px;
-    height: 25px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.pagination {
+    position: absolute;
+    top: 20px;
+    bottom: 0;
+    left: 20px;
+    right: 20px;
+    width: 100%;
+}
+
+
+.userPhoto {
+    width: 50px;
+    height: 50px;
+    margin-right: 20px;
+}
+
+.pagesWrapper {
+    margin-bottom: 20px;
 }
 
 .pages {
     cursor: pointer;
+    margin-right: 5px;
 }
 
-.currentPage{
+
+.currentPage {
     font-weight: bold;
+}
+
+.userName {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+button {
+    cursor: pointer;
+    margin-left: 20px;
+    width: 100px;
+    height: 30px;
+}
+
+.unFollow {
+    background-color: #6f7270;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+}
+
+.information {
+    margin-right: 20px;
+    width: 200px;
 }

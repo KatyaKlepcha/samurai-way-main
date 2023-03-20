@@ -1,10 +1,11 @@
-import {applyMiddleware, combineReducers, createStore} from "redux";
+import {AnyAction, applyMiddleware, combineReducers, createStore} from "redux";
 import profileReducer, {ProfileActionsTypes} from "./profileReducer";
 import dialogsReducer, {DialogActionsTypes} from "./dialogsReducer";
 import sidebarReducer from "./sidebarReducer";
-import usersReducer, { UsersActionsTypes } from "./usersReducer";
+import usersReducer, {UsersActionsTypes} from "./usersReducer";
 import authReducer, {AuthActionsTypes} from "./auth-reducer";
-import thunkMiddleware from 'redux-thunk'
+import thunkMiddleware, {ThunkDispatch} from 'redux-thunk'
+import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 
 let rootReducer = combineReducers(
     {
@@ -23,6 +24,11 @@ type StoreType = typeof store;
 
 // @ts-ignore
 window.store = store
+
+export type AppThunkDispatch = ThunkDispatch<AppStateType, any, AnyAction> //типизация кастомного хука
+export const useAppDispatch = () => useDispatch<AppThunkDispatch>()
+export const useAppSelector: TypedUseSelectorHook<AppStateType> = useSelector
+
 
 export type ActionsTypes =
     ProfileActionsTypes
