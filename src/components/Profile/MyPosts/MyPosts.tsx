@@ -1,43 +1,39 @@
-import React, {ChangeEvent} from "react";
+import React from "react";
 import s from './MyPosts.module.css'
 import Post from "./Post/Post";
-import { MyPostsType } from "./MyPostsContainer";
-import { PostType } from "../../redux/profileReducer";
-//
-// type MyPostsType = {
-//     posts: Array<PostType>
-//     newPostText: string
-//     // dispatch: (action: ActionsTypes) => void
-//     updateNewPostText: (newPostText: string) => void
-//     addPost: () => void
-// }
+import {MyPostsType} from "./MyPostsContainer";
+import {PostType} from "../../redux/profileReducer";
+import {SubmitHandler, useForm} from "react-hook-form";
+
+type FormValues = {
+    newPostText: string
+};
 
 const MyPosts = (props: MyPostsType) => {
-    // const newPostRef = React.createRef<HTMLTextAreaElement>()
 
-    const onAddPost = () => {
-        props.addPost()
-        //props.dispatch(addNewPostActionCreator())
-    }
+    const {
+        register, //позволяет регистрировать различные поля для формы
+        handleSubmit,  //обертка над нашим кастомным хэндлером отправки формы. позволяет сделать то, что например связано с валидацией
+        reset
+    } = useForm<FormValues>({
+        mode: "onBlur"
+    })
 
-    const onChangePost = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        let newPostText = e.currentTarget.value
-        props.updateNewPostText(newPostText)
-        //props.dispatch(updateNewPostTextActionCreator(newPostText))
-        // let text = newPostRef.current?.value
-        // text && props.updateNewPostText(text)
+    const onSubmit: SubmitHandler<FormValues> = ({newPostText}) => {
+        props.addPost(newPostText)
+        reset()
     }
 
     return (
         <div className={s.posts}>My Posts
-            <div>
-                <textarea value={props.newPostText} onChange={onChangePost}/>
+            <form onSubmit={handleSubmit(onSubmit)} >
+                <textarea {...register('newPostText')} />
                 <div>
-                    <button onClick={onAddPost} className={s.button}>Send
+                    <button type={'submit'} className={s.button}>Send
                     </button>
                 </div>
 
-            </div>
+            </form>
             {props.posts.map((p: PostType) => <Post key={p.id} message={p.message} likesCount={p.likesCount}/>)}
         </div>
     )
