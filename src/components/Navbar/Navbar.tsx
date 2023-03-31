@@ -9,7 +9,7 @@ const Navbar = () => {
     const userId = useSelector<AppStateType, number>(state => state.auth.id)
     return (
         <nav className={s.nav}>
-            <div className={`${s.item}`}><NavLink to={'/profile/' + userId} activeClassName={s.active}>Profile</NavLink>
+            <div className={`${s.item}`}><NavLink to={'/profile'} activeClassName={s.active}>Profile</NavLink>
             </div>
             <div className={`${s.item}`}><NavLink to={'/messages'} activeClassName={s.active}>Messages</NavLink></div>
             <div className={`${s.item}`}><NavLink to={'/users'} activeClassName={s.active}>Users</NavLink></div>

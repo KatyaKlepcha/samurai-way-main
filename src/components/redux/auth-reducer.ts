@@ -3,7 +3,6 @@ import {authAPI} from "../api/api";
 import {AppThunkDispatch} from "./redux-store";
 
 const SET_USER_DATA = 'SET-USER-DATA'
-const SET_LOGIN_DATA = 'SET-LOGIN-DATA'
 
 let initialState = {
     id: 0,
@@ -12,13 +11,13 @@ let initialState = {
     isAuth: false
 }
 
-export type AuthActionsTypes = ReturnType<typeof setAuthUserData> | ReturnType<typeof setLoginData>
+export type AuthActionsTypes = ReturnType<typeof setAuthUserData>
 
 
 export type InitialStateType = {
     id: number,
     login: string,
-    email: string
+    email: string,
     isAuth: boolean
 }
 
@@ -26,30 +25,19 @@ export type InitialStateType = {
 const authReducer = (state: InitialStateType = initialState, action: AuthActionsTypes): InitialStateType => {
     switch (action.type) {
         case SET_USER_DATA:
-            return {
-                ...state,
-                ...action.data,
-                isAuth: true
-            }
-        case SET_LOGIN_DATA:
-            return {
-                ...state,
-                ...action.data
-            }
 
+            return {
+                ...state,
+                ...action.payload
+            }
         default:
             return state
     }
 }
 
-export const setAuthUserData = (id: number, login: string, email: string) => ({
+export const setAuthUserData = (id: number, login: string, email: string, isAuth: boolean) => ({
     type: SET_USER_DATA,
-    data: {id, login, email}
-}) as const
-
-export const setLoginData = (email: string, password: string, rememberMe: boolean) => ({
-    type: SET_LOGIN_DATA,
-    data: {email, password, rememberMe}
+    payload: {id, login, email, isAuth}
 }) as const
 
 
@@ -58,7 +46,7 @@ export const getAuthUserData = () => {
         authAPI.me().then(response => {
             if (response.data.resultCode === 0) {
                 let {id, login, email} = response.data.data
-                dispatch(setAuthUserData(id, login, email))
+                dispatch(setAuthUserData(id, login, email, true))
             }
         })
     }
@@ -69,11 +57,18 @@ export const loginData = (email: string, password: string, rememberMe: boolean) 
     return (dispatch: AppThunkDispatch) => {
         authAPI.login(email, password, rememberMe).then(response => {
             if (response.data.resultCode === 0) {
-                console.log('response', response)
-                dispatch(setLoginData(email, password, rememberMe))
                 dispatch(getAuthUserData())
             }
-            // dispatch(getAuthUserData())
+        })
+    }
+}
+
+export const logout = () => {
+    return (dispatch: AppThunkDispatch) => {
+        authAPI.logout().then(response => {
+            if (response.data.resultCode === 0) {
+                dispatch(setAuthUserData(0, '', '', false))
+            }
         })
     }
 }

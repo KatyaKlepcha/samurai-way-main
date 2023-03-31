@@ -1,3 +1,14 @@
-.profile_wrapper{
+.profileWrapper {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 150px;
+}
 
+
+.profileWrapper > img {
+    align-self: center;
+}
+
+.aboutMe > div:first-child {
+    font-size: 30px;
 }

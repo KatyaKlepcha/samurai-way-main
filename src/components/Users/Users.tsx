@@ -52,7 +52,7 @@ const Users = (props: UsersPropsType) => {
                             <div>{'u.location.country'}</div>
                             <div>{'u.location.city'}</div>
                         </div>
-                        <div>
+                        <div className={s.buttonWrapper}>
                             {u.followed ? <button disabled={props.followingInProgress.some(id => id === u.id)}
                                                   onClick={() => {
                                                       props.unFollow(u.id)

@@ -41,7 +41,7 @@ const LoginForm = () => {
             <div className={s.error}>{errors?.email && <p>{errors?.email?.message || "Error"}</p>}</div>
 
             <label> Password:
-                <input placeholder={'Password'} {...register('password', {
+                <input placeholder={'Password'} type={'password'} {...register('password', {
                     required: 'The field is required',
                     // minLength: {
                     //     value: 5,
