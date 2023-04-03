@@ -4,7 +4,6 @@ import {follow, getUsers, setCurrentPage, toggleInFollowingProgress, unFollow, U
 import React from "react";
 import Users from "./Users";
 import Preloader from "../common/Preloader";
-import {withAuthRedirect} from "../hoc/withAuthRedirect";
 import {compose} from "redux";
 
 type MapStateType = {
@@ -67,7 +66,7 @@ const mapStateToProps = (state: AppStateType): MapStateType => {
 
 export type UsersType = MapStateType & MapDispatchType
 
-export default compose<React.ComponentType>(withAuthRedirect,
+export default compose<React.ComponentType>(
     connect(mapStateToProps, {
     follow, unFollow,
     getUsers,

@@ -5,7 +5,6 @@ import {getStatus, getUserProfile, updateUserStatus} from "../redux/profileReduc
 import {AppStateType} from "../redux/redux-store";
 import {withRouter} from "react-router-dom";
 import {RouteComponentProps} from "react-router";
-import {withAuthRedirect} from "../hoc/withAuthRedirect";
 import {compose} from "redux";
 
 type PathParamsType = {
@@ -20,6 +19,9 @@ class ProfileContainer extends React.Component<PropsType> {
         if (!userId) {
             // return (+userId === 2)
             userId = this.props.userId
+            if(!userId){ //можно и так делать редирект (через history.push)
+                this.props.history.push('/login')
+            }
         }
 
         this.props.getUserProfile(+userId)
@@ -27,7 +29,9 @@ class ProfileContainer extends React.Component<PropsType> {
     }
 
     render() {
-        return <Profile {...this.props} profile={this.props.profile} status={this.props.status}
+        return <Profile {...this.props}
+                        profile={this.props.profile}
+                        status={this.props.status}
                         updateUserStatus={this.props.updateUserStatus}/>
     }
 
@@ -84,6 +88,5 @@ const mapStateToProps = (state: AppStateType): MapStateType => {
 
 export default compose<React.ComponentType>(
     connect(mapStateToProps, {getUserProfile, getStatus, updateUserStatus}),
-    withRouter,
-    withAuthRedirect
+    withRouter
 )(ProfileContainer)
