@@ -1,5 +1,4 @@
-import React, {ChangeEvent, useState} from 'react'
-import {useAppDispatch} from "../../redux/redux-store";
+import React, {ChangeEvent, useEffect, useState} from 'react'
 
 
 type ProfileStatusType = {
@@ -7,11 +6,13 @@ type ProfileStatusType = {
     updateUserStatus: (status: string) => void
 }
 
-const ProfileStatusWithHooks = (props:ProfileStatusType) => {
+const ProfileStatusWithHooks = (props: ProfileStatusType) => {
     const [status, setStatus] = useState(props.status)
     const [editMode, setEditMode] = useState(false)
 
-    const dispatch = useAppDispatch()
+    useEffect(() => {
+        setStatus(props.status)
+    }, [props.status])
 
     const activateEditMode = () => {
         setEditMode(true)
