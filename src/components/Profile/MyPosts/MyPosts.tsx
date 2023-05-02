@@ -1,4 +1,4 @@
-import React from "react";
+import React, {memo} from "react";
 import s from './MyPosts.module.css'
 import Post from "./Post/Post";
 import {MyPostsType} from "./MyPostsContainer";
@@ -9,8 +9,8 @@ type FormValues = {
     newPostText: string
 };
 
-const MyPosts = (props: MyPostsType) => {
-
+const MyPosts = memo((props: MyPostsType) => {
+    console.log('RENDER')
     const {
         register, //позволяет регистрировать различные поля для формы
         handleSubmit,  //обертка над нашим кастомным хэндлером отправки формы. позволяет сделать то, что например связано с валидацией
@@ -37,6 +37,6 @@ const MyPosts = (props: MyPostsType) => {
             {props.posts.map((p: PostType) => <Post key={p.id} message={p.message} likesCount={p.likesCount}/>)}
         </div>
     )
-}
+})
 
 export default MyPosts
