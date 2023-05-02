@@ -4,15 +4,6 @@
     align-items: center;
 }
 
-.pagination {
-    position: absolute;
-    top: 20px;
-    bottom: 0;
-    left: 20px;
-    right: 20px;
-    width: 100%;
-}
-
 
 .userPhoto {
     width: 50px;
@@ -20,19 +11,6 @@
     margin-right: 20px;
 }
 
-.pagesWrapper {
-    margin-bottom: 20px;
-}
-
-.pages {
-    cursor: pointer;
-    margin-right: 5px;
-}
-
-
-.currentPage {
-    font-weight: bold;
-}
 
 .userName {
     font-size: 20px;

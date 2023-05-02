@@ -17,7 +17,7 @@ const LoginForm = () => {
             errors, isValid
         },
         handleSubmit,  //обертка над нашим кастомным хэндлером отправки формы. позволяет сделать то, что например связано с валидацией
-        reset
+        // reset
     } = useForm<FormValues>({
         mode: "onBlur"
     })
@@ -27,10 +27,9 @@ const LoginForm = () => {
     const onSubmit: SubmitHandler<FormValues> = ({email, password, rememberMe}) => {
         // alert(JSON.stringify(data))
         dispatch(loginData(email, password, rememberMe))
-        reset()
+        // reset()
     }
 
-    console.log('render')
     return (
         <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
             <label> Email:

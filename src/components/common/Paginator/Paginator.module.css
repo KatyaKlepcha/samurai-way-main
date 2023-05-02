@@ -1,0 +1,12 @@
+.pagesWrapper {
+    margin-bottom: 20px;
+}
+
+.pages {
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.currentPage {
+    font-weight: bold;
+}
