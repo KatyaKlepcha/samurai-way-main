@@ -4,7 +4,7 @@ import Paginator from "../common/Paginator/Paginator";
 import User from "./User";
 
 type UsersPropsType = {
-    totalUsersCount: number
+    totalItemsCount: number
     pageSize: number
     users: UserType[]
     currentPage: number
@@ -14,17 +14,16 @@ type UsersPropsType = {
     followingInProgress: Array<number>
 }
 
-const Users: FC<UsersPropsType> = ({currentPage, totalUsersCount, onPageChanged, pageSize, users, ...props}) => {
+const Users: FC<UsersPropsType> = ({currentPage, totalItemsCount, onPageChanged, pageSize, users, ...props}) => {
 
     return (
         <div>
             <Paginator
                 currentPage={currentPage}
-                totalUsersCount={totalUsersCount}
+                totalItemsCount={totalItemsCount}
                 onPageChanged={onPageChanged}
                 pageSize={pageSize}/>
             {users.map((u: UserType) => {
-                console.log('props.followingInProgress.some(id => id === u.id)', props.followingInProgress.some(id => id === u.id))
                 return (
                     <User key={u.id} user={u} follow={props.follow} unFollow={props.unFollow}
                           followingInProgress={props.followingInProgress}/>
