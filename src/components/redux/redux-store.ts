@@ -1,4 +1,4 @@
-import {AnyAction, applyMiddleware, combineReducers, createStore} from "redux";
+import {AnyAction, applyMiddleware, combineReducers, compose, createStore} from "redux";
 import profileReducer, {ProfileActionsTypes} from "./profileReducer";
 import dialogsReducer, {DialogActionsTypes} from "./dialogsReducer";
 import sidebarReducer from "./sidebarReducer";
@@ -7,6 +7,7 @@ import authReducer, {AuthActionsTypes} from "./auth-reducer";
 import thunkMiddleware, {ThunkDispatch} from 'redux-thunk'
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 import appReducer from "./app-reducer";
+import {composeWithDevTools} from "redux-devtools-extension";
 
 let rootReducer = combineReducers(
     {
@@ -21,11 +22,14 @@ let rootReducer = combineReducers(
 
 export type AppStateType = ReturnType<typeof rootReducer>
 
-let store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
+
+const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunkMiddleware)));
+
+//let store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
 type StoreType = typeof store;
 
 // @ts-ignore
-window.store = store
+window.__store__ = store
 
 export type AppThunkDispatch = ThunkDispatch<AppStateType, any, AnyAction> //типизация кастомного хука
 export const useAppDispatch = () => useDispatch<AppThunkDispatch>()
