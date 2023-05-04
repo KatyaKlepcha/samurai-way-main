@@ -12,3 +12,12 @@
 .aboutMe > div:first-child {
     font-size: 30px;
 }
+
+.userPhoto {
+    width: 200px;
+    height: 200px;
+}
+
+input[type='file']{
+    border: none
+}

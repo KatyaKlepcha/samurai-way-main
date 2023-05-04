@@ -2,13 +2,13 @@ import {Dispatch} from "redux";
 import {usersAPI} from "../api/api";
 import {updateFollowUnfollowInArray} from "../utils/object-helpers";
 
-const FOLLOW = 'FOLLOW'
-const UNFOLLOW = 'UNFOLLOW'
-const SET_USERS = 'SET-USERS'
-const SET_CURRENT_PAGE = 'SET-CURRENT-PAGE'
-const SET_TOTAL_USERS_COUNT = 'SET-TOTAL-USERS-COUNT'
-const TOGGLE_IS_FETCHING = 'TOGGLE-IS-FETCHING'
-const TOGGLE_IN_FOLLOWING_PROGRESS = 'TOGGLE-IN-FOLLOWING-PROGRESS'
+const FOLLOW = 'users/FOLLOW'
+const UNFOLLOW = 'users/UNFOLLOW'
+const SET_USERS = 'users/SET-USERS'
+const SET_CURRENT_PAGE = 'users/SET-CURRENT-PAGE'
+const SET_TOTAL_USERS_COUNT = 'users/SET-TOTAL-USERS-COUNT'
+const TOGGLE_IS_FETCHING = 'users/TOGGLE-IS-FETCHING'
+const TOGGLE_IN_FOLLOWING_PROGRESS = 'users/TOGGLE-IN-FOLLOWING-PROGRESS'
 
 export type UsersActionsTypes = ReturnType<typeof followSuccess>
     | ReturnType<typeof unFollowSuccess>
@@ -62,14 +62,12 @@ type LocationType = {
 const usersReducer = (state: InitialStateType = initialState, action: UsersActionsTypes): InitialStateType => {
     switch (action.type) {
         case FOLLOW:
-            console.log('FOLLOW')
             return {
                 //...state, users: state.users.map((u) => u.id === action.userID ? {...u, followed: true} : u)
                 ...state, users: updateFollowUnfollowInArray(state.users, action.userID, {followed: true})
             }
 
         case UNFOLLOW:
-            console.log('UNFOLLOW')
             return {
                 //...state, users: state.users.map((u) => u.id === action.userID ? {...u, followed: false} : u)
                 ...state, users: updateFollowUnfollowInArray(state.users, action.userID,  {followed: false})

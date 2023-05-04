@@ -1,7 +1,7 @@
 import React from 'react';
 import Profile from "./Profile";
 import {connect} from "react-redux";
-import {getStatus, getUserProfile, updateUserStatus} from "../redux/profileReducer";
+import {getStatus, getUserProfile, savePhoto, updateUserStatus} from "../redux/profileReducer";
 import {AppStateType} from "../redux/redux-store";
 import {withRouter} from "react-router-dom";
 import {RouteComponentProps} from "react-router";
@@ -19,7 +19,7 @@ class ProfileContainer extends React.Component<PropsType> {
         if (!userId) {
             // return (+userId === 2)
             userId = this.props.userId
-            if(!userId){ //можно и так делать редирект (через history.push)
+            if (!userId) { //можно и так делать редирект (через history.push)
                 this.props.history.push('/login')
             }
         }
@@ -30,9 +30,12 @@ class ProfileContainer extends React.Component<PropsType> {
 
     render() {
         return <Profile {...this.props}
+                        isOwner={!this.props.match.params.userId}
                         profile={this.props.profile}
                         status={this.props.status}
-                        updateUserStatus={this.props.updateUserStatus}/>
+                        updateUserStatus={this.props.updateUserStatus}
+                        savePhoto={this.props.savePhoto}
+        />
     }
 
 }
@@ -47,33 +50,34 @@ type MapDispatchType = {
     getUserProfile: (userId: number) => void
     getStatus: (userId: number) => void
     updateUserStatus: (status: string) => void
+    savePhoto: (photo: File) => void
 }
 
 
 export type ProfileType = {
-    aboutMe: string
-    contacts: ContactsType
-    fullName: string
-    lookingForAJob: boolean
-    lookingForAJobDescription: string
+    aboutMe?: string
+    contacts?: ContactsType
+    fullName?: string
+    lookingForAJob?: boolean
+    lookingForAJobDescription?: string
     photos: PhotosType
-    userId: number
+    userId?: number
 }
 
 type ContactsType = {
-    facebook: string
-    github: string
-    instagram: string
+    facebook: string | null
+    github: string | null
+    instagram: string | null
     mainLink: null
-    twitter: string
-    vk: string
+    twitter: string | null
+    vk: string | null
     website: null
     youtube: null
 }
 
-type PhotosType = {
-    small: string
-    large: string
+export type PhotosType = {
+    small: string | null
+    large: string | null
 }
 
 type ProfilesType = MapStateType & MapDispatchType
@@ -87,6 +91,6 @@ const mapStateToProps = (state: AppStateType): MapStateType => {
 }
 
 export default compose<React.ComponentType>(
-    connect(mapStateToProps, {getUserProfile, getStatus, updateUserStatus}),
+    connect(mapStateToProps, {getUserProfile, getStatus, updateUserStatus, savePhoto}),
     withRouter
 )(ProfileContainer)

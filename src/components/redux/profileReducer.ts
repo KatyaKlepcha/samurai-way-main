@@ -1,12 +1,13 @@
 import {Dispatch} from "redux";
-import {ProfileType} from "../Profile/ProfileContainer";
+import {PhotosType, ProfileType} from "../Profile/ProfileContainer";
 import {profileAPI} from "../api/api";
 
 
-const ADD_POST = 'ADD-POST'
-const SET_USER_PROFILE = 'SET-USER-PROFILE'
-const SET_STATUS = 'SET-STATUS'
-const DELETE_POST = 'DELETE-POST'
+const ADD_POST = 'profile/ADD-POST'
+const SET_USER_PROFILE = 'profile/SET-USER-PROFILE'
+const SET_STATUS = 'profile/SET-STATUS'
+const DELETE_POST = 'profile/DELETE-POST'
+const SET_PHOTO_SUCCESS = 'profile/SET-PHOTO-SUCCESS'
 
 let initialState = {
     posts: [
@@ -35,6 +36,7 @@ export type ProfileActionsTypes = ReturnType<typeof addNewPostActionCreator>
     | ReturnType<typeof setUserProfile>
     | ReturnType<typeof setStatus>
     | ReturnType<typeof deletePost>
+    | ReturnType<typeof setPhotoSuccess>
 
 const profileReducer = (state: InitialStateType = initialState, action: ProfileActionsTypes): InitialStateType => {
     switch (action.type) {
@@ -66,6 +68,11 @@ const profileReducer = (state: InitialStateType = initialState, action: ProfileA
             return {
                 ...state, status: action.status
             }
+
+        case SET_PHOTO_SUCCESS:
+            return {
+                ...state, profile: {...state.profile, photos: action.photos}
+            }
         default:
             return state
     }
@@ -90,6 +97,11 @@ export const setStatus = (status: string) => ({
     status
 }) as const
 
+export const setPhotoSuccess = (photos: PhotosType) => ({
+    type: SET_PHOTO_SUCCESS,
+    photos
+}) as const
+
 
 export const getUserProfile = (userId: number) => async (dispatch: Dispatch<ProfileActionsTypes>) => {
     const response = await profileAPI.getProfile(userId)
@@ -108,6 +120,13 @@ export const updateUserStatus = (status: string) => async (dispatch: Dispatch<Pr
     const response = await profileAPI.updateStatus(status)
     if (response.data.resultCode === 0) {
         dispatch(setStatus(status))
+    }
+}
+
+export const savePhoto = (file: File) => async (dispatch: Dispatch<ProfileActionsTypes>) => {
+    const response = await profileAPI.savePhoto(file)
+    if (response.data.resultCode === 0) {
+        dispatch(setPhotoSuccess(response.data.data.photos))
     }
 }
 
