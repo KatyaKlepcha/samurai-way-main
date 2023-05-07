@@ -53,6 +53,8 @@ export const loginData = (email: string, password: string, rememberMe: boolean) 
     const response = await authAPI.login(email, password, rememberMe);
     if (response.data.resultCode === 0) {
         dispatch(getAuthUserData())
+    } else {
+
     }
 }
 

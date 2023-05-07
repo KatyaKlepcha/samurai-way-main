@@ -1,0 +1,19 @@
+.container {
+    width: 300px;
+}
+
+
+.buttonEdit {
+    cursor: pointer;
+}
+
+.nameWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between
+}
+
+.information div{
+    margin-bottom: 10px;
+}
+

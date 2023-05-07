@@ -1,4 +1,5 @@
 import {default as axios} from "axios";
+import {ProfileType} from "components/Profile/ProfileContainer";
 
 const instance = axios.create({
     withCredentials: true,
@@ -43,7 +44,11 @@ export const profileAPI = {
                 "Content-Type": "multipart/form-data"
             }
         })
-    }
+    },
+
+    saveProfile(profile: ProfileType) {
+        return instance.put('profile', profile)
+    },
 }
 
 export const authAPI = {

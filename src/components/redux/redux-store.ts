@@ -4,7 +4,7 @@ import dialogsReducer, {DialogActionsTypes} from "./dialogsReducer";
 import sidebarReducer from "./sidebarReducer";
 import usersReducer, {UsersActionsTypes} from "./usersReducer";
 import authReducer, {AuthActionsTypes} from "./auth-reducer";
-import thunkMiddleware, {ThunkDispatch} from 'redux-thunk'
+import thunkMiddleware, {ThunkAction, ThunkDispatch} from 'redux-thunk'
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 import appReducer from "./app-reducer";
 import {composeWithDevTools} from "redux-devtools-extension";
@@ -41,5 +41,7 @@ export type ActionsTypes =
     | DialogActionsTypes
     | AuthActionsTypes
     | UsersActionsTypes
+
+export type ThunkType = ThunkAction<void, AppStateType, unknown, ActionsTypes>
 
 export default store;

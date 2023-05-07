@@ -16,6 +16,7 @@ const LoginForm = () => {
         formState: {
             errors, isValid
         },
+        setError,
         handleSubmit,  //обертка над нашим кастомным хэндлером отправки формы. позволяет сделать то, что например связано с валидацией
         // reset
     } = useForm<FormValues>({

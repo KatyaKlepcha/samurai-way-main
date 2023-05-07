@@ -22,3 +22,7 @@
     padding: 20px;
     position: relative;
 }
+
+button {
+    cursor: pointer;
+}
